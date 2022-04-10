@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, KeyboardAvoidingView, TextInput } from 'react-native'
-import {React, useState} from 'react'
+import { React, useState } from 'react'
 import { auth } from '../firebase'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
