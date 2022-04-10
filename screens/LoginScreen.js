@@ -1,7 +1,22 @@
-import { StyleSheet, Text, View, KeyboardAvoidingView, TouchableOpacity, TextInput } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View, KeyboardAvoidingView, TextInput } from 'react-native'
+import {React, useState} from 'react'
+import { auth } from '../firebase'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 
 export default function LoginScreen() {
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+
+  const handleSignUp = () => {
+        auth
+            .createUserWithEmailAndPassword(email, password)
+            .then(userCredentials => {
+                const user = userCredentials.user
+                console.log(user.email);
+            })
+            .catch(error => alert(error.message))
+    }
+
   return (
     <KeyboardAvoidingView
         style={styles.container}
@@ -9,7 +24,7 @@ export default function LoginScreen() {
     >
         <View style={styles.heading}>
             <Text style={styles.header}>
-                name.
+                no name.
             </Text>
         </View>
 
@@ -17,15 +32,15 @@ export default function LoginScreen() {
             <TextInput
                 placeholder="email"
                 placeholderTextColor={'#6a6a6a'}
-                // </View>value={email}
-                // onChangeText={text => setEmail(text)}
+                value={email}
+                onChangeText={text => setEmail(text)}
                 style={styles.input}
             />
             <TextInput
                 placeholder="password"
                 placeholderTextColor={'#6a6a6a'}
-                // </View>value={email}
-                // onChangeText={text => setEmail(text)}
+                value={password}
+                onChangeText={text => setPassword(text)}
                 style={styles.input}
             />
         </View>
@@ -39,9 +54,9 @@ export default function LoginScreen() {
                         login
                     </Text>
             </TouchableOpacity>
-            <TouchableOpacity
-                // onPress{...() => {}}
-                style={styles.button}>
+            <TouchableOpacity 
+                onPress={handleSignUp}
+                style={styles.button} >
                     <Text
                     style={styles.buttonLogin}>
                         register
